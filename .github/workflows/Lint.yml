@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   eslint:
@@ -16,8 +16,3 @@ jobs:
           node-version: 16
       - run: npm ci # or yarn install
       - uses: sibiraj-s/action-eslint@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
