@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "parcel-bundler": "^1.6.1",
-    "@lottiefiles/lottie-player": "1.5.7"
+    "@lottiefiles/lottie-player": "1.5.7",
+    "parcel": "^2.10.3"
   },
   "scripts": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "prettier": "3.1.1"
+  }
 }
