@@ -1,14 +1,23 @@
 {
-  "name": "the-purple-bubble",
+  "name": "thepurplebubble-site",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@lottiefiles/lottie-player": "1.5.7",
     "parcel": "^2.10.3"
   },
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "eslint": "^8.55.0",
-    "prettier": "3.1.1"
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "3.1.1",
+    "prettier-eslint": "^16.1.2"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
