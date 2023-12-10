@@ -183,7 +183,7 @@
   flex-direction: column;
   background-size: cover;
   justify-content: center;
-  background-image: url("public/untitled%20design%20(3)-1500h.png");
+  background-image: url("public/bg.png");
 }
 .home-text {
   color: var(--dl-color-gray-white);
@@ -264,7 +264,7 @@
 @media (max-width: 1600px) {
   .home-hero {
     background-size: cover;
-    background-image: url("public/untitled%20design%20(3)-1500h.png");
+    background-image: url("public/bg.png");
   }
   .home-features {
     width: 100%;
