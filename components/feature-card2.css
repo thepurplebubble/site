@@ -25,10 +25,7 @@
   margin-bottom: var(--dl-space-space-unit);
 }
 
-
-
-
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .feature-card2-feature-card {
     flex-direction: row;
   }
@@ -36,7 +33,7 @@
     flex-direction: column;
   }
 }
-@media(max-width: 479px) {
+@media (max-width: 479px) {
   .feature-card2-container {
     flex-direction: column;
   }

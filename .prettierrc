@@ -1,0 +1,7 @@
+{
+    "endOfLine": "lf",
+    "trailingComma": "none",
+    "plugins": [""],
+    "pluginSearchDirs": ["."],
+    "overrides": []
+  }
