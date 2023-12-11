@@ -1,13 +1,19 @@
 {
   "name": "thepurplebubble-site",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@lottiefiles/lottie-player": "1.5.7",
-    "parcel": "^2.10.3"
+    "parcel": "^2.10.3",
+    "astro": "^4.0.4"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "devDependencies": {
     "eslint": "^8.55.0",

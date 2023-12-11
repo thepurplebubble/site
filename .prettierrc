@@ -1,7 +1,4 @@
 {
-    "endOfLine": "lf",
-    "trailingComma": "none",
-    "plugins": [""],
-    "pluginSearchDirs": ["."],
-    "overrides": []
-  }
+  "tabWidth": 2,
+  "useTabs": false
+}
