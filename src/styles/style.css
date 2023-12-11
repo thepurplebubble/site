@@ -400,7 +400,7 @@
 @media (max-width: 1600px) {
   .home-hero {
     background-size: cover;
-    background-image: url("public/bg.png");
+    background-image: url("/bg.png");
   }
 
   .home-features {
