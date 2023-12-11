@@ -307,7 +307,7 @@
   flex-direction: column;
   background-size: cover;
   justify-content: center;
-  background-image: url("public/bg.png");
+  background-image: url("bg.png");
 }
 
 .home-text {

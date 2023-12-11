@@ -1,7 +1,13 @@
 name: Documentation
 description: Request an update to invalid/outdated documentation
 title: "[DOC] - "
-labels: ["🔒 staff only", "🚦 status: awaiting triage", "🧹 status: ticket work required", "📄 aspect: text"]
+labels:
+  [
+    "🔒 staff only",
+    "🚦 status: awaiting triage",
+    "🧹 status: ticket work required",
+    "📄 aspect: text",
+  ]
 projects: ["thepurplebubble/1", "thepurplebubble/2"]
 assignees:
   - jdogcoder

@@ -1,14 +1,20 @@
 name: Bug report
 description: Create a report to help us address an error.
 title: "[BUG] - "
-labels: ["🛠 goal: fix", "🔒 staff only", "🚦 status: awaiting triage", "🧹 status: ticket work required"]
+labels:
+  [
+    "🛠 goal: fix",
+    "🔒 staff only",
+    "🚦 status: awaiting triage",
+    "🧹 status: ticket work required",
+  ]
 projects: ["thepurplebubble/1", "thepurplebubble/2"]
 assignees:
   - jdogcoder
 body:
   - type: markdown
     attributes:
-      value: '# Bug report'
+      value: "# Bug report"
   - type: textarea
     id: bugdescription
     attributes:
