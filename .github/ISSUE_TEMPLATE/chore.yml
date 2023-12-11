@@ -1,8 +1,10 @@
 name: Chore
 description: For requesting chores, such as cleaning up code.
 title: "[CHORE] - "
-# labels: [""]
-# assignees:
+labels: ["🔒 staff only", "🚦 status: awaiting triage", "🧹 status: ticket work required"]
+projects: ["thepurplebubble/1", "thepurplebubble/2"]
+assignees:
+  - jdogcoder
 body:
   - type: markdown
     attributes:

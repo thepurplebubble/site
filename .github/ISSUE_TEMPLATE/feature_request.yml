@@ -1,8 +1,10 @@
 name: Feature request
 description: Suggest an idea for this project
 title: "[FEAT] - "
-# labels: [""]
-# assignees:
+labels: ["🔒 staff only", "🚦 status: awaiting triage", "🧹 status: ticket work required", "⭐ goal: addition"]
+projects: ["thepurplebubble/1", "thepurplebubble/2"]
+assignees:
+  - jdogcoder
 body:
   - type: markdown
     attributes:
