@@ -2,106 +2,176 @@
 
 ---
 
-<div class="email-form" id="email-form">
-  <form
-    action="https://postal.hackclub.com/subscribe"
-    method="POST"
-    accept-charset="utf-8"
-  >
-    <label for="name">Name</label><br />
-    <input type="text" name="name" id="name" />
-    <br />
-    <label for="email">Email</label><br />
-    <input type="email" name="email" id="email" /><br /><br />
-    <input type="checkbox" name="gdpr" id="gdpr" />
-    <span
-      ><strong>Marketing permission</strong>: I give my consent to Purple Bubble
-      to be in touch with me via email using the information I have provided in
-      this form for the purpose of news, updates and marketing.</span
-    >
-    <br /><br />
-    <span
-      ><strong>What to expect</strong>: If you wish to withdraw your consent and
-      stop hearing from us, simply click the unsubscribe link at the bottom of
-      every email we send or contact us at team@purplebubble.org. We value and
-      respect your personal data and privacy. To view our privacy policy, please
-      visit our website. By submitting this form, you agree that we may process
-      your information in accordance with these terms.</span
-    >
-    <br /><br /><div style="display:none;">
-      <label for="hp">HP</label><br />
-      <input type="text" name="hp" id="hp" />
+<div>
+  <div class="signup-container">
+    <div class="signup-container1">
+      <div class="signup-container2">
+        <div class="signup-container3">
+          <form
+            action="https://postal.hackclub.com/subscribe"
+            method="POST"
+            accept-charset="utf-8"
+          >
+            <h2>Newsletter Signup</h2>
+            <br />
+            <input type="text" name="name" id="name" placeholder="Name" />
+            <input type="email" name="email" id="email" placeholder="Email" />
+            <label>
+              <input
+                type="checkbox"
+                name="gdpr"
+                id="gdpr"
+                value="consent given"
+                class="css-checkbox"
+              />
+			  <label for="gdpr" class="css-label"></label>
+              <span>
+                <strong>Marketing permission</strong>
+                 : I give my consent to Purple Bubble to be in touch with me via
+                email using the information I have provided in this form for the
+                purpose of news, updates and marketing.
+              </span>
+            </label>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div style="display:none;">
+              <label for="hp">HP</label>
+              <br />
+              <input type="text" name="hp" id="hp" />
+            </div>
+            <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
+            <input type="hidden" name="subform" value="yes" />
+            <input type="submit" name="submit" id="submit" />
+          </form>
+        </div>
+      </div>
     </div>
-    <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
-    <input type="hidden" name="subform" value="yes" />
-    <input type="submit" name="submit" id="submit" />
-  </form>
+  </div>
 </div>
 
 <style>
-  .email-form {
-	color: var(--dl-color-gray-black);
-	display: flexbox;
-	padding: 0.5rem 1rem;
-	border-color: var(--dl-color-gray-black);
-	border-width: 1px;
-	border-radius: 4px;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--dl-color-gray-white); /* added white border */
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--dl-color-gray-white);
+    border-radius: 10px; /* reduced border-radius */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+  }
+
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--dl-color-gray-white);
+    border-radius: 0.15em;
+    transform: translateY(0em);
+    margin-top: 10px;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+  }
+
+  input[type="checkbox"]:checked::before {
+    content: "";
+    display: inline-block;
+    width: 0.65em;
+    height: 0.65em;
+    border: 0.15em solid var(--dl-color-gray-white);
+    border-radius: 0.15em;
+    transform: translateY(-0.15em);
+    background-color: var(--dl-color-purple-300);
+  }
+
+  .css-checkbox {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+  .css-checkbox + label {
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    color: rgb(0, 0, 0);
+  }
+  .css-checkbox + label::before {
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-radius: 2px;
+    box-shadow: none;
+  }
+  .css-checkbox:checked + label::after {
+    content: " ";
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48cGF0aCBmaWxsPSIjMDA2YmVkIiBkPSJNMCA5NkMwIDYwLjY1IDI4LjY1IDMyIDY0IDMySDM4NEM0MTkuMyAzMiA0NDggNjAuNjUgNDQ4IDk2VjQxNkM0NDggNDUxLjMgNDE5LjMgNDgwIDM4NCA0ODBINjRDMjguNjUgNDgwIDAgNDUxLjMgMCA0MTZWOTZ6Ii8+PC9zdmc+");
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: center center;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0px;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    background-color: transparent;
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+  }
+
+  input[type="submit"] {
+    background-color: var(--dl-color-purple-300);
+    color: var(--dl-color-gray-white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: hsl(273, 100%, 70%);
+  }
+
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder {
+    color: var(--gray);
+    opacity: 1;
   }
 </style>
-
-<style>
-	/* The popup form - hidden by default */
-	.email-form {
-		display: none;
-		z-index: 9;
-	}
-
-	/* Add styles to the form container */
-	.form-container {
-		max-width: 300px;
-		padding: 10px;
-		background-color: white;
-	}
-
-	/* Full-width input fields */
-	.form-container input[type=text], .form-container input[type=password] {
-	width: 100%;
-	padding: 15px;
-	margin: 5px 0 22px 0;
-	border: none;
-	background: #f1f1f1;
-	}
-
-	/* When the inputs get focus, do something */
-	.form-container input[type=text]:focus {
-		background-color: #ddd;
-		outline: none;
-	}
-
-	/* Set a style for the submit/login button */
-	.form-container .btn {
-		background-color: #04AA6D;
-		color: white;
-		padding: 16px 20px;
-		border: none;
-		cursor: pointer;
-		width: 100%;
-		margin-bottom:10px;
-		opacity: 0.8;
-	}
-
-	/* Add some hover effects to buttons */
-	.form-container .btn:hover, .open-button:hover {
-		opacity: 1;
-	}
-</style>
-
-<!-- <div class="form-popup" id="emailform" data-netlify="true">
-    <form action="/action_page.php" class="form-container">				  
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
-  
-      <button type="submit" class="btn">Submit</button>
-    </form>
-  </div>
-</div> -->
