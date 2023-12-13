@@ -14,8 +14,8 @@
           >
             <h2>Newsletter Signup</h2>
             <br />
-            <input type="text" name="name" id="name" placeholder="Name" />
-            <input type="email" name="email" id="email" placeholder="Email" />
+            <input type="text" name="name" id="name" placeholder="Name" required/>
+            <input type="email" name="email" id="email" placeholder="Email" required/>
             <label>
               <input
                 type="checkbox"
@@ -23,6 +23,7 @@
                 id="gdpr"
                 value="consent given"
                 class="css-checkbox"
+				required
               />
 			  <label for="gdpr" class="css-label"></label>
               <span>
@@ -34,8 +35,6 @@
             </label>
             <br />
             <br />
-            <br />
-            <br />
             <div style="display:none;">
               <label for="hp">HP</label>
               <br />
@@ -43,7 +42,7 @@
             </div>
             <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
             <input type="hidden" name="subform" value="yes" />
-            <input type="submit" name="submit" id="submit" />
+			<button type="submit" name="submit" id="submit" class="home-button button">Submit</button>
           </form>
         </div>
       </div>
@@ -62,8 +61,8 @@
     background-color: var(--black);
     color: var(--dl-color-gray-white);
     padding: 20px;
-    border-radius: 10px;
-    border: 2px solid var(--dl-color-gray-white); /* added white border */
+    border-radius: 4px;
+    border: 1px solid var(--dl-color-gray-white); /* added white border */
   }
 
   input[type="text"],
@@ -71,7 +70,7 @@
     width: 100%;
     padding: 10px;
     border: 1px solid var(--dl-color-gray-white);
-    border-radius: 10px; /* reduced border-radius */
+    border-radius: 4px; /* reduced border-radius */
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     background-color: var(--black);
@@ -84,7 +83,7 @@
     appearance: none;
     width: 1.15em;
     height: 1.15em;
-    border: 0.15em solid var(--dl-color-gray-white);
+    border: 1px solid var(--dl-color-gray-white);
     border-radius: 0.15em;
     transform: translateY(0em);
     margin-top: 10px;
@@ -111,7 +110,7 @@
     color: var(--dl-color-gray-white);
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
   }
 
