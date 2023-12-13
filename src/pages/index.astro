@@ -117,16 +117,20 @@ import '../styles/style.css';
 	const buttons = document.querySelectorAll('[form-button]');
 	const form = document.getElementById('email-form');
 
+	form.style.visibility = "hidden";
+
 	// Add event listeners to fire confetti when a button is clicked.
 	buttons.forEach((button) => {
 		button.addEventListener('click', () => toggleForm());
 	});
 	function toggleForm() {
-		if (form.style.display == "none") {
-			form.style.display = "block";
+		if (form.style.visibility == "hidden") {
+			form.style.visibility = "visible";
+			console.log("visible")
 		}
 		else {
-			form.style.display = "none";
+			form.style.visibility = "hidden";
+			console.log("hidden")
 		}
 	}
 </script>
