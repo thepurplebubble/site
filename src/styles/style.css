@@ -350,7 +350,6 @@
 .home-button {
   color: var(--dl-color-gray-white);
   font-size: 0.75rem;
-  transition: 0.3s;
   margin-left: var(--dl-space-space-unit);
   padding-top: var(--dl-space-space-unit);
   border-color: var(--dl-color-gray-white);
