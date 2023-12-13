@@ -1,0 +1,107 @@
+---
+
+---
+
+<div class="email-form" id="email-form">
+  <form
+    action="https://postal.hackclub.com/subscribe"
+    method="POST"
+    accept-charset="utf-8"
+  >
+    <label for="name">Name</label><br />
+    <input type="text" name="name" id="name" />
+    <br />
+    <label for="email">Email</label><br />
+    <input type="email" name="email" id="email" /><br /><br />
+    <input type="checkbox" name="gdpr" id="gdpr" />
+    <span
+      ><strong>Marketing permission</strong>: I give my consent to Purple Bubble
+      to be in touch with me via email using the information I have provided in
+      this form for the purpose of news, updates and marketing.</span
+    >
+    <br /><br />
+    <span
+      ><strong>What to expect</strong>: If you wish to withdraw your consent and
+      stop hearing from us, simply click the unsubscribe link at the bottom of
+      every email we send or contact us at team@purplebubble.org. We value and
+      respect your personal data and privacy. To view our privacy policy, please
+      visit our website. By submitting this form, you agree that we may process
+      your information in accordance with these terms.</span
+    >
+    <br /><br /><div style="display:none;">
+      <label for="hp">HP</label><br />
+      <input type="text" name="hp" id="hp" />
+    </div>
+    <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
+    <input type="hidden" name="subform" value="yes" />
+    <input type="submit" name="submit" id="submit" />
+  </form>
+</div>
+
+<style>
+  .email-form {
+	color: var(--dl-color-gray-black);
+	display: flexbox;
+	padding: 0.5rem 1rem;
+	border-color: var(--dl-color-gray-black);
+	border-width: 1px;
+	border-radius: 4px;
+  }
+</style>
+
+<style>
+	/* The popup form - hidden by default */
+	.email-form {
+		display: none;
+		z-index: 9;
+	}
+
+	/* Add styles to the form container */
+	.form-container {
+		max-width: 300px;
+		padding: 10px;
+		background-color: white;
+	}
+
+	/* Full-width input fields */
+	.form-container input[type=text], .form-container input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #f1f1f1;
+	}
+
+	/* When the inputs get focus, do something */
+	.form-container input[type=text]:focus {
+		background-color: #ddd;
+		outline: none;
+	}
+
+	/* Set a style for the submit/login button */
+	.form-container .btn {
+		background-color: #04AA6D;
+		color: white;
+		padding: 16px 20px;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+		margin-bottom:10px;
+		opacity: 0.8;
+	}
+
+	/* Add some hover effects to buttons */
+	.form-container .btn:hover, .open-button:hover {
+		opacity: 1;
+	}
+</style>
+
+<!-- <div class="form-popup" id="emailform" data-netlify="true">
+    <form action="/action_page.php" class="form-container">				  
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+  
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+</div> -->
