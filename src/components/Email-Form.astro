@@ -7,15 +7,23 @@
     <div class="signup-container1">
       <div class="signup-container2">
         <div class="signup-container3">
-          <form
-            action="https://postal.hackclub.com/subscribe"
-            method="POST"
-            accept-charset="utf-8"
-          >
+          <form accept-charset="utf-8" id="subscribeForm">
             <h2>Newsletter Signup</h2>
             <br />
-            <input type="text" name="name" id="name" placeholder="Name" required/>
-            <input type="email" name="email" id="email" placeholder="Email" required/>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
+            />
             <label>
               <input
                 type="checkbox"
@@ -23,9 +31,9 @@
                 id="gdpr"
                 value="consent given"
                 class="css-checkbox"
-				required
+                required
               />
-			  <label for="gdpr" class="css-label"></label>
+              <label for="gdpr" class="css-label"></label>
               <span>
                 <strong>Marketing permission</strong>
                  : I give my consent to Purple Bubble to be in touch with me via
@@ -42,8 +50,21 @@
             </div>
             <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
             <input type="hidden" name="subform" value="yes" />
-			<button type="submit" name="submit" id="submit" class="home-button button">Submit</button>
+            <input
+              type="text"
+              name="boolean"
+              id="boolean"
+              value="true"
+              hidden
+            />
+            <button
+              type="submit"
+              name="submit"
+              id="submit"
+              class="home-button button">Submit</button
+            >
           </form>
+          <div id="result"></div>
         </div>
       </div>
     </div>
@@ -98,7 +119,7 @@
     height: 0.55em;
     border: 1px solid var(--dl-color-purple-300);
     border-radius: 0.15em;
-	position: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -124,3 +145,34 @@
     opacity: 1;
   }
 </style>
+
+<script>
+  function subscribe() {
+    // Get form data
+    const form = document.getElementById("subscribeForm") as HTMLFormElement;
+    const formData = new FormData(form);
+
+    // Make an AJAX request using the Fetch API
+    fetch("https://postal.hackclub.com/subscribe", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Display the result on the page
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = data.message; // Adjust this based on the Sendy API response format
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      subscribe();
+    });
+  });
+</script>
