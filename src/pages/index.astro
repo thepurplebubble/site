@@ -38,7 +38,7 @@ import "../styles/style.css";
           </div>
         </div>
         <EmailForm />
-        <button class="chevron-button"></button>
+        <button class="chevron-button" id="chevron-button"></button>
         <br />
         <br />
         <br />
@@ -148,7 +148,7 @@ import "../styles/style.css";
 
 <script>
   const buttons = document.querySelectorAll("[form-button]");
-  const scroll = document.querySelector(".chevron-button");
+  const scroll = document.getElementById("chevron-button");
   const form = document.getElementById("email-form");
 
   form.style.visibility = "hidden";
@@ -160,10 +160,10 @@ import "../styles/style.css";
   function toggleForm() {
     if (form.style.visibility == "hidden") {
       form.style.visibility = "visible";
-      console.log("visible");
+      scroll.style.visibility = "hidden";
     } else {
       form.style.visibility = "hidden";
-      console.log("hidden");
+	  scroll.style.visibility = "visible";
     }
   }
   scroll.addEventListener("click", () => {
