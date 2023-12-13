@@ -397,11 +397,18 @@
   height: 504px;
 }
 
-.chevron {
+.chevron-button {
   width: 4em;
   height: 4em;
   fill: var(--dl-color-gray-white);
   transform: translateY(-5em);
+  background-image: url("/chevron.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.chevron-button:hover {
+  transform: translateY(-5em) scale(1.1);
 }
 
 @media (max-width: 1600px) {
