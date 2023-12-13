@@ -397,6 +397,13 @@
   height: 504px;
 }
 
+.chevron {
+  width: 4em;
+  height: 4em;
+  fill: var(--dl-color-gray-white);
+  transform: translateY(-5em);
+}
+
 @media (max-width: 1600px) {
   .home-hero {
     background-size: cover;
