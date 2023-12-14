@@ -155,13 +155,15 @@
 <script>
   function subscribe() {
     // Get form data
-    const form = document.getElementById("subscribeForm") as HTMLFormElement;
-    const formData = new FormData(form);
+    var formData = new FormData(document.querySelector('form'));
+    const formDataObj = {};
+    formData.forEach((value, key) => (formDataObj[key] = value));
+    console.log(formDataObj);
 
-    // Make an AJAX request using the Fetch API
-    fetch("https://postal.hackclub.com/subscribe", {
+    // Make an AJAX request using the Fetch API to the netlify fetch function
+    fetch("/api/fetch", {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(formDataObj),
     })
       .then((response) => response.json())
       .then((data) => {
