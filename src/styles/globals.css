@@ -1,7 +1,10 @@
 :root {
+  --dl-color-gray-transparent: #77747488;
   --dl-color-gray-500: #777474ff;
   --dl-color-gray-black: #ffffffff;
   --dl-color-gray-white: #ffffff;
+  --dl-color-purple-dark: #8100e5;
+  --dl-color-purple-light: #b04dff;
   --dl-space-space-unit: 16px;
   --dl-size-size-maxwidth: 1400px;
   --dl-space-space-twounits: 32px;
@@ -109,4 +112,23 @@ img {
 
 html {
   scroll-behavior: smooth;
+}
+
+.hero {
+  width: 100%;
+  height: 757px;
+  display: flex;
+  padding: var(--dl-space-space-threeunits);
+  position: relative;
+  min-height: 80vh;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  justify-content: center;
+  background-image: url("bg.png");
+}
+
+.hero h1 {
+  color: var(--dl-color-gray-white);
+  font-size: 3rem;
 }

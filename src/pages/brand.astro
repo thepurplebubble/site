@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/brand.css";
+---
+
+<Layout title="PurpleBubble Branding">
+  <main>
+    <div class="hero">
+      <h1>Purple Bubble Branding</h1>
+    </div>
+    <div class="container">
+      <h2>Logo</h2>
+      <p>This is the logo for Purple Bubble. Click on it to download.</p>
+      <div class="logos">
+        <div class="logo">
+          <img src="/logo.png" alt="Main Purple Bubble Logo" />
+          <p>Purple Bubble Logo</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Colors</h2>
+      <p>
+        These are the colors for Purple Bubble. Click on them to copy their hex
+        code.
+      </p>
+      <div class="colors">
+        <div class="color color-dark-purple">
+          <p>Dark Purple</p>
+          <p>#8100e5</p>
+        </div>
+        <div class="color color-light-purple">
+          <p>Light Purple</p>
+          <p>#b04dff</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const logos = document.querySelectorAll(".logo");
+    logos.forEach((logo) => {
+      logo.addEventListener("click", () => {
+        const img = logo.querySelector("img");
+        const src = img.getAttribute("src");
+        const a = document.createElement("a");
+        a.href = src;
+        a.download = src;
+        a.click();
+        a.remove();
+      });
+    });
+
+    const colors = document.querySelectorAll(".color");
+    colors.forEach((color) => {
+      color.addEventListener("click", () => {
+        navigator.clipboard.writeText(
+          "#" + color.computedStyleMap().get("background-color").toString(),
+        );
+      });
+    });
+  </script>
+</Layout>
