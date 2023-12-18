@@ -125,7 +125,7 @@ html {
   flex-direction: column;
   background-size: cover;
   justify-content: center;
-  background-image: url("bg.png");
+  background-image: url("/bg.png");
 }
 
 .hero h1 {
