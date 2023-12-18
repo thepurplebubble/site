@@ -1,7 +1,3 @@
----
-
----
-
 <div id="email-form">
   <div class="signup-container">
     <div class="signup-container1">
@@ -64,7 +60,6 @@
               class="home-button button">Submit</button
             >
           </form>
-          <div id="result"></div>
         </div>
       </div>
     </div>
@@ -157,6 +152,21 @@
   event.preventDefault();
 
   const formData = new FormData(event.target as HTMLFormElement);
+  const notification = document.getElementById('notification');
+  const chevronButton = document.getElementById('chevron-button');
+  const emailForm = document.getElementById('email-form');
+  const notificationTitle = document.getElementById('notification-title');
+  const notificationMessage = document.getElementById('notification-message');
+
+  function displayNotification(title, message) {
+    notificationTitle.innerHTML = title;
+    notificationMessage.innerHTML = message
+    
+    notification.classList.add('show');
+    // hide the form
+    emailForm.style.visibility = "hidden";
+    chevronButton.style.visibility = "visible";
+  }
 
   fetch('/api/fetch', {
     method: 'POST',
@@ -167,13 +177,13 @@
   })
   .then(response => response.json())
   .then(data => {
-    // Update the result div with the response
-    document.getElementById('result').innerHTML = JSON.stringify(data);
+    console.log('Success:', data);
+    displayNotification("Success!", "Thank you for signing up to our newsletter!" + "<br>" + data)
   })
   .catch(error => {
     // Handle errors
     console.error('Error:', error);
-    document.getElementById('result').innerHTML = 'Error occurred.';
+    displayNotification("Error!", "There was an error signing you up to our newsletter. Please try again later." + "<br>" + error)
   });
 });
 </script>
