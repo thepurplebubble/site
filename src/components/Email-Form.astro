@@ -181,19 +181,23 @@
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
-          displayNotification(
-            "Success!",
-            "Thank you for signing up to our newsletter!" + "<br>" + data,
-          );
+          if (data != "true") {
+            throw new Error(data);
+          } else {
+            console.log("Success:", data);
+            displayNotification(
+              "Success!",
+              "Thank you for signing up to our newsletter!",
+            );
+          }
         })
         .catch((error) => {
           // Handle errors
           console.error("Error:", error);
           displayNotification(
             "Error!",
-            "There was an error signing you up to our newsletter. Please try again later." +
-              "<br>" +
+            "There was an error signing you up to our newsletter." +
+              "<br/><br/>" +
               error,
           );
         });
