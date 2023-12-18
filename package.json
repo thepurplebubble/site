@@ -4,8 +4,9 @@
   "private": true,
   "dependencies": {
     "@lottiefiles/lottie-player": "1.5.7",
-    "parcel": "^2.10.3",
-    "astro": "^4.0.4"
+    "astro": "^4.0.4",
+    "axios": "^1.6.2",
+    "parcel": "^2.10.3"
   },
   "scripts": {
     "prepare": "husky install",

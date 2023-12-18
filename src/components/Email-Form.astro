@@ -153,34 +153,27 @@
 </style>
 
 <script>
-  function subscribe() {
-    // Get form data
-    var formData = new FormData(document.querySelector('form'));
-    const formDataObj = {};
-    formData.forEach((value, key) => (formDataObj[key] = value));
-    console.log(formDataObj);
+  document.getElementById('subscribeForm').addEventListener('submit', function (event) {
+  event.preventDefault();
 
-    // Make an AJAX request using the Fetch API to the netlify fetch function
-    fetch("/api/fetch", {
-      method: "POST",
-      body: JSON.stringify(formDataObj),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Display the result on the page
-        const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = data.message; // Adjust this based on the Sendy API response format
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+  const formData = new FormData(event.target as HTMLFormElement);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      subscribe();
-    });
+  fetch('/api/fetch', {
+    method: 'POST',
+    body: JSON.stringify(Object.fromEntries(formData)),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Update the result div with the response
+    document.getElementById('result').innerHTML = JSON.stringify(data);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error('Error:', error);
+    document.getElementById('result').innerHTML = 'Error occurred.';
   });
+});
 </script>
