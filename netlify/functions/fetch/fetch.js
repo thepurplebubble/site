@@ -1,13 +1,14 @@
 // fetch.js
 const axios = require('axios');
+const qs = require('qs'); // Add this line
 
 exports.handler = async function (event, context) {  
   try {
     // Parse the incoming form data from the request body
     const { name, email, gdpr, hp, list, subform, boolean } = JSON.parse(event.body);
 
-    // Make the cURL request using axios
-    const response = await axios.post('https://postal.hackclub.com/subscribe', {
+    // Stringify the data into a query string
+    const data = qs.stringify({
       name,
       email,
       gdpr,
@@ -15,6 +16,13 @@ exports.handler = async function (event, context) {
       list,
       subform,
       boolean,
+    });
+
+    // Make the cURL request using axios
+    const response = await axios.post('https://postal.hackclub.com/subscribe', data, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
 
     // log the response for debugging purposes
