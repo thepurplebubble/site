@@ -69,8 +69,8 @@
 <style>
   #email-form {
     transform: translateY(33em);
-	visibility: hidden;
-	position: absolute;
+    visibility: hidden;
+    position: absolute;
   }
 
   form {
@@ -148,42 +148,54 @@
 </style>
 
 <script>
-  document.getElementById('subscribeForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+  document
+    .getElementById("subscribeForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-  const formData = new FormData(event.target as HTMLFormElement);
-  const notification = document.getElementById('notification');
-  const chevronButton = document.getElementById('chevron-button');
-  const emailForm = document.getElementById('email-form');
-  const notificationTitle = document.getElementById('notification-title');
-  const notificationMessage = document.getElementById('notification-message');
+      const formData = new FormData(event.target as HTMLFormElement);
+      const notification = document.getElementById("notification");
+      const chevronButton = document.getElementById("chevron-button");
+      const emailForm = document.getElementById("email-form");
+      const notificationTitle = document.getElementById("notification-title");
+      const notificationMessage = document.getElementById(
+        "notification-message",
+      );
 
-  function displayNotification(title, message) {
-    notificationTitle.innerHTML = title;
-    notificationMessage.innerHTML = message
-    
-    notification.classList.add('show');
-    // hide the form
-    emailForm.style.visibility = "hidden";
-    chevronButton.style.visibility = "visible";
-  }
+      function displayNotification(title, message) {
+        notificationTitle.innerHTML = title;
+        notificationMessage.innerHTML = message;
 
-  fetch('/api/fetch', {
-    method: 'POST',
-    body: JSON.stringify(Object.fromEntries(formData)),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-    displayNotification("Success!", "Thank you for signing up to our newsletter!" + "<br>" + data)
-  })
-  .catch(error => {
-    // Handle errors
-    console.error('Error:', error);
-    displayNotification("Error!", "There was an error signing you up to our newsletter. Please try again later." + "<br>" + error)
-  });
-});
+        notification.classList.add("show");
+        // hide the form
+        emailForm.style.visibility = "hidden";
+        chevronButton.style.visibility = "visible";
+      }
+
+      fetch("/api/fetch", {
+        method: "POST",
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          displayNotification(
+            "Success!",
+            "Thank you for signing up to our newsletter!" + "<br>" + data,
+          );
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error("Error:", error);
+          displayNotification(
+            "Error!",
+            "There was an error signing you up to our newsletter. Please try again later." +
+              "<br>" +
+              error,
+          );
+        });
+    });
 </script>
