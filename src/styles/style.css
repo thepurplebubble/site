@@ -20,6 +20,7 @@
   --dl-color-success-300: #199033;
   --dl-color-success-500: #32a94c;
   --dl-color-success-700: #4cc366;
+  --dl-color-purple-300: hsl(273, 100%, 50%);;
   --dl-size-size-xxlarge: 288px;
   --dl-size-size-maxwidth: 1400px;
   --dl-radius-radius-round: 50%;
@@ -349,7 +350,6 @@
 .home-button {
   color: var(--dl-color-gray-white);
   font-size: 0.75rem;
-  transition: 0.3s;
   margin-left: var(--dl-space-space-unit);
   padding-top: var(--dl-space-space-unit);
   border-color: var(--dl-color-gray-white);
@@ -395,6 +395,20 @@
 .home-lottie-node {
   width: 483px;
   height: 504px;
+}
+
+.chevron-button {
+  width: 4em;
+  height: 4em;
+  fill: var(--dl-color-gray-white);
+  transform: translateY(-5em);
+  background-image: url("/chevron.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.chevron-button:hover {
+  transform: translateY(-5em) scale(1.1);
 }
 
 @media (max-width: 1600px) {
