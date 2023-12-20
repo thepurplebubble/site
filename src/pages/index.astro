@@ -2,10 +2,10 @@
 import EmailForm from "../components/Email-Form.astro";
 import Layout from "../layouts/Layout.astro";
 import Notification from "../components/Notification.astro";
-import "../styles/style.css";
+import "../styles/index.css";
 ---
 
-<Layout title="Purple Bubble!">
+<Layout title="Purple Bubble">
   <main>
     <div>
       <script
@@ -14,15 +14,13 @@ import "../styles/style.css";
       ></script>
 
       <div class="home-container">
-        <div class="home-hero">
-          <h1 class="home-text">Welcome To The Purple Bubble!</h1>
+        <div class="hero">
+          <h1>Welcome To Purple Bubble!</h1>
           <span class="home-text1">
             <span>
               A Free and OpenSource Project Created and Maintained By The
               Community
             </span>
-            <span></span>
-            <span></span>
           </span>
           <div class="home-btn-group">
             <a
@@ -40,13 +38,6 @@ import "../styles/style.css";
         </div>
         <EmailForm />
         <button class="chevron-button" id="chevron-button"></button>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <div class="home-features">
           <div class="home-container1">
             <div
@@ -145,7 +136,7 @@ import "../styles/style.css";
       </div>
     </div>
   </main>
-  <Notification/>
+  <Notification />
 </Layout>
 
 <script>
@@ -165,15 +156,15 @@ import "../styles/style.css";
       scroll.style.visibility = "hidden";
     } else {
       form.style.visibility = "hidden";
-	  scroll.style.visibility = "visible";
+      scroll.style.visibility = "visible";
     }
   }
   scroll.addEventListener("click", () => {
-	// scroll to one page down
-	window.scrollBy({
-	  top: window.innerHeight,
-	  left: 0,
-	  behavior: "smooth",
-	});
+    // scroll to one page down
+    window.scrollBy({
+      top: window.innerHeight,
+      left: 0,
+      behavior: "smooth",
+    });
   });
 </script>

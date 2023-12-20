@@ -6,6 +6,7 @@ This is the repo for @thepurplebubble's website.
 
 The site is written in Astro and deployed via Netlify.
 To start developing localy:
+
 1. clone the repo
 2. install node modules
    - `npm install`

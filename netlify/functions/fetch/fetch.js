@@ -1,11 +1,13 @@
 // fetch.js
-const axios = require('axios');
-const qs = require('qs'); // Add this line
+const axios = require("axios");
+const qs = require("qs"); // Add this line
 
-exports.handler = async function (event, context) {  
+exports.handler = async function (event, context) {
   try {
     // Parse the incoming form data from the request body
-    const { name, email, gdpr, hp, list, subform, boolean } = JSON.parse(event.body);
+    const { name, email, gdpr, hp, list, subform, boolean } = JSON.parse(
+      event.body,
+    );
 
     // Stringify the data into a query string
     const data = qs.stringify({
@@ -19,11 +21,15 @@ exports.handler = async function (event, context) {
     });
 
     // Make the cURL request using axios
-    const response = await axios.post('https://postal.hackclub.com/subscribe', data, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+    const response = await axios.post(
+      "https://postal.hackclub.com/subscribe",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
 
     // log the response for debugging purposes
     console.log(response.data);
@@ -39,7 +45,7 @@ exports.handler = async function (event, context) {
     console.log(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' }),
+      body: JSON.stringify({ error: "Internal Server Error" }),
     };
   }
 };

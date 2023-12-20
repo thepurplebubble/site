@@ -1,0 +1,133 @@
+h1 {
+  text-align: center;
+}
+
+h2 {
+  font-weight: 600;
+  margin-bottom: var(--dl-space-space-unit);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  max-width: 25vmin;
+  max-height: 25vmin;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  padding: var(--dl-space-space-threeunits);
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #000000;
+}
+
+.logos {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dl-space-space-unit);
+  margin: var(--dl-space-space-threeunits) 0px;
+  padding: 15px;
+  border-width: 2px;
+  border-color: var(--dl-color-gray-transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.logo div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.colors {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5vw;
+  align-items: center;
+  justify-content: center;
+  margin: var(--dl-space-space-threeunits) 0px;
+  margin: 20px 0px;
+}
+
+.color {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: var(--dl-space-space-threeunits) 0px;
+}
+
+.color p {
+  margin: 0;
+}
+
+.color p:first-child {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.color p:last-child {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.color-dark-purple {
+  background-color: var(--dl-color-purple-dark);
+}
+
+.color-light-purple {
+  background-color: var(--dl-color-purple-dark);
+}
+
+.fonts {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.font {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dl-space-space-unit);
+  margin: var(--dl-space-space-threeunits) 0px;
+  padding: 15px 50px;
+  border-width: 2px;
+  border-color: var(--dl-color-gray-transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.font p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
