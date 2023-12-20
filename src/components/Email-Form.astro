@@ -69,18 +69,20 @@
 <style>
 @media (max-width: 600px) {
  form {
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transform: none;
+ width: 100%;
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: none;
+ will-change: auto;
  }
 }
 
 #email-form {
  visibility: hidden;
  position: fixed;
+ transform: none;
+ will-change: auto;
 }
 
   form {
