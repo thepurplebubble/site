@@ -342,11 +342,6 @@
 }
 
 @media (max-width: 1600px) {
-  .home-hero {
-    background-size: cover;
-    background-image: url("/bg.png");
-  }
-
   .home-features {
     width: 100%;
     align-items: flex-start;
@@ -361,11 +356,6 @@
 }
 
 @media (max-width: 1200px) {
-  .home-hero {
-    background-size: cover;
-    background-image: 4350d34e-bac0-48e1-b3d6-59ff1f2d7c82;
-  }
-
   .home-features {
     height: 761px;
     margin-bottom: 0px;
