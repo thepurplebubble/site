@@ -67,40 +67,43 @@
 </div>
 
 <style>
-  #email-form {
-    transform: translateY(33em);
-    visibility: hidden;
-    position: absolute;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    margin: auto;
-    background-color: var(--black);
-    color: var(--dl-color-gray-white);
-    padding: 20px;
-    border-radius: 4px;
-    border: 1px solid var(--dl-color-gray-white); /* added white border */
-  }
-
- @media (max-width: 600px) {
-  form {
-    width: 100%;
-    position: static;
-    transform: none;
-  }
+ #email-form {
+ transform: translateY(33em);
+ visibility: hidden;
+ position: absolute;
  }
 
+ form {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ width: 50%;
+ margin: auto;
+ background-color: var(--black);
+ color: var(--dl-color-gray-white);
+ padding: 20px;
+ border-radius: 4px;
+ border: 1px solid var(--dl-color-gray-white);
+ }
+
+ /* smaller screen support */
+ @media (max-width: 600px) {
+ form {
+   width: 100%;
+   position: static;
+   transform: none;
+ }
+ }
+
+ /* larger screen support */
  @media (min-width: 601px) {
-  form {
-    width: 50%;
-    position: absolute;
-    transform: translateY(33em);
-  }
+ form {
+   width: 50%;
+   position: static;
+   top: 33em; /* Adjust this value as needed */
+   transform: none;
+ }
  }
 
   input[type="text"],
