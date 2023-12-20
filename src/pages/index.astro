@@ -1,5 +1,7 @@
 ---
+import EmailForm from "../components/Email-Form.astro";
 import Layout from "../layouts/Layout.astro";
+import Notification from "../components/Notification.astro";
 import "../styles/index.css";
 ---
 
@@ -29,9 +31,13 @@ import "../styles/index.css";
             >
               Help Contribute
             </a>
-            <button class="home-button button">Sign Up For Newsletter</button>
+            <button type="button" class="home-button button" form-button
+              >Sign Up For Newsletter</button
+            >
           </div>
         </div>
+        <EmailForm />
+        <button class="chevron-button" id="chevron-button"></button>
         <div class="home-features">
           <div class="home-container1">
             <div
@@ -130,4 +136,35 @@ import "../styles/index.css";
       </div>
     </div>
   </main>
+  <Notification />
 </Layout>
+
+<script>
+  const buttons = document.querySelectorAll("[form-button]");
+  const scroll = document.getElementById("chevron-button");
+  const form = document.getElementById("email-form");
+
+  form.style.visibility = "hidden";
+
+  // Add event listeners to fire confetti when a button is clicked.
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => toggleForm());
+  });
+  function toggleForm() {
+    if (form.style.visibility == "hidden") {
+      form.style.visibility = "visible";
+      scroll.style.visibility = "hidden";
+    } else {
+      form.style.visibility = "hidden";
+      scroll.style.visibility = "visible";
+    }
+  }
+  scroll.addEventListener("click", () => {
+    // scroll to one page down
+    window.scrollBy({
+      top: window.innerHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+</script>

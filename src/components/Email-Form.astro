@@ -1,0 +1,212 @@
+<div id="email-form">
+  <div class="signup-container">
+    <div class="signup-container1">
+      <div class="signup-container2">
+        <div class="signup-container3">
+          <form accept-charset="utf-8" id="subscribeForm">
+            <h2>Newsletter Signup</h2>
+            <br />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
+            />
+            <label>
+              <input
+                type="checkbox"
+                name="gdpr"
+                id="gdpr"
+                value="consent given"
+                class="css-checkbox"
+                required
+              />
+              <label for="gdpr" class="css-label"></label>
+              <span>
+                <strong>Marketing permission</strong>
+                 : I give my consent to Purple Bubble to be in touch with me via
+                email using the information I have provided in this form for the
+                purpose of news, updates and marketing.
+              </span>
+            </label>
+            <br />
+            <br />
+            <div style="display:none;">
+              <label for="hp">HP</label>
+              <br />
+              <input type="text" name="hp" id="hp" />
+            </div>
+            <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
+            <input type="hidden" name="subform" value="yes" />
+            <input
+              type="text"
+              name="boolean"
+              id="boolean"
+              value="true"
+              hidden
+            />
+            <button
+              type="submit"
+              name="submit"
+              id="submit"
+              class="home-button button">Submit</button
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @media (max-width: 600px) {
+   form {
+     width: 100%;
+     position: static;
+     transform: none;
+   }
+
+  #email-form {
+    transform: translateY(33em);
+    visibility: hidden;
+    position: absolute;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--dl-color-gray-white); /* added white border */
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--dl-color-gray-white);
+    border-radius: 4px; /* reduced border-radius */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+  }
+
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 0.95em;
+    height: 0.95rem;
+    border: 1px solid var(--dl-color-gray-white);
+    border-radius: 0.15em;
+    transform: translateY(0.115em);
+    margin-top: 10px;
+    background-color: var(--black);
+    color: var(--dl-color-gray-white);
+  }
+
+  input[type="checkbox"]:checked::before {
+    content: "";
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    border: 1px solid var(--dl-color-purple-300);
+    border-radius: 0.15em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--dl-color-purple-300);
+  }
+
+  input[type="submit"] {
+    background-color: var(--dl-color-purple-300);
+    color: var(--dl-color-gray-white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: hsl(273, 100%, 70%);
+  }
+
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder {
+    color: var(--gray);
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document
+    .getElementById("subscribeForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target as HTMLFormElement);
+      const notification = document.getElementById("notification");
+      const chevronButton = document.getElementById("chevron-button");
+      const emailForm = document.getElementById("email-form");
+      const notificationTitle = document.getElementById("notification-title");
+      const notificationMessage = document.getElementById(
+        "notification-message",
+      );
+
+      function displayNotification(title, message) {
+        notificationTitle.innerHTML = title;
+        notificationMessage.innerHTML = message;
+
+        notification.classList.add("show");
+        // hide the form
+        emailForm.style.visibility = "hidden";
+        chevronButton.style.visibility = "visible";
+      }
+
+      fetch("/api/fetch", {
+        method: "POST",
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data != "true") {
+            throw new Error(data);
+          } else {
+            console.log("Success:", data);
+            displayNotification(
+              "Success!",
+              "Thank you for signing up to our newsletter!",
+            );
+          }
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error("Error:", error);
+          displayNotification(
+            "Error!",
+            "There was an error signing you up to our newsletter." +
+              "<br/><br/>" +
+              error,
+          );
+        });
+    });
+</script>
