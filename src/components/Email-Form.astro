@@ -164,6 +164,10 @@
 </style>
 
 <script>
+   document.getElementById('signup-button').addEventListener('click', function() {
+     document.getElementById('email-form').style.position = 'static';
+   };
+
   document
     .getElementById("subscribeForm")
     .addEventListener("submit", function (event) {
