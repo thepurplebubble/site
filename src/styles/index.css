@@ -36,6 +36,27 @@
   --dl-space-space-oneandhalfunits: 24px;
 }
 
+.hero {
+  width: 100%;
+  height: 757px;
+  display: flex;
+  padding: var(--dl-space-space-threeunits);
+  position: relative;
+  min-height: 80vh;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  justify-content: center;
+  background-image: url("https://cdn.purplebubble.org/background.png");
+}
+
+.hero h1 {
+  color: var(--dl-color-gray-white);
+  font-size: 3rem;
+  text-align: center;
+}
+
+
 .button {
   color: var(--dl-color-gray-black);
   display: inline-block;
@@ -378,18 +399,28 @@
   height: 504px;
 }
 
+.chevron-container {
+  margin-bottom: var(--dl-space-space-threeunits);
+  transform: translateY(-5rem);
+  width: 4em;
+  height: 4em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .chevron-button {
   width: 4em;
   height: 4em;
   fill: var(--dl-color-gray-white);
-  transform: translateY(-5em);
   background-image: url("/chevron.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .chevron-button:hover {
-  transform: translateY(-5em) scale(1.1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 1600px) {
@@ -418,10 +449,6 @@
 }
 
 @media (max-width: 991px) {
-  .home-hero {
-    flex-direction: column;
-  }
-
   .home-text {
     text-align: center;
   }
@@ -429,9 +456,60 @@
   .home-text1 {
     text-align: center;
   }
+
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-container2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-text1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-features {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-lottie-node {
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .home-hero {
+    flex-direction: column;
+  }
+
+  .home-btn-group {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-button {
+    margin-top: var(--dl-space-space-unit);
+    margin-left: 0px;
+  }
+
   .home-hero {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
@@ -440,6 +518,10 @@
   .home-features {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
+  }
+
+  .chevron-container {
+    display: none;
   }
 }
 
@@ -450,15 +532,6 @@
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
-  }
-
-  .home-btn-group {
-    flex-direction: column;
-  }
-
-  .home-button {
-    margin-top: var(--dl-space-space-unit);
-    margin-left: 0px;
   }
 
   .home-features {
