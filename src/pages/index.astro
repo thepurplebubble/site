@@ -31,13 +31,11 @@ import "../styles/index.css";
             >
               Help Contribute
             </a>
-            <button type="button" class="home-button button" form-button
+            <button type="button" class="home-button button" id="email-form-button" form-button
               >Sign Up For Newsletter</button
             >
           </div>
         </div>
-        <EmailForm />
-        <span class="emailbr" id="emailbr"></span>
         <button class="chevron-button" id="chevron-button"></button>
         <div class="home-features">
           <div class="home-container1">
@@ -137,32 +135,23 @@ import "../styles/index.css";
       </div>
     </div>
   </main>
+  <EmailForm />
   <Notification />
 </Layout>
 
 <script>
-  const buttons = document.querySelectorAll("[form-button]");
+  const button = document.getElementById("email-form-button");
   const scroll = document.getElementById("chevron-button");
   const form = document.getElementById("email-form");
-  const emailbr = document.getElementById("emailbr");
 
-  form.style.visibility = "hidden";
-
-  // Add event listeners to fire confetti when a button is clicked.
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => toggleForm());
+  button.addEventListener("click", () => {
+    // scroll to email form component
+    form.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "nearest",
+    });
   });
-  function toggleForm() {
-    if (form.style.visibility == "hidden") {
-      form.style.visibility = "visible";
-      scroll.style.visibility = "hidden";
-      emailbr.classList.add("show");
-    } else {
-      form.style.visibility = "hidden";
-      scroll.style.visibility = "visible";
-      emailbr.classList.remove("show");
-    }
-  }
   scroll.addEventListener("click", () => {
     // scroll to one page down
     window.scrollBy({
