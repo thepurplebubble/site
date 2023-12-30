@@ -6,15 +6,15 @@ APP_PID=$!
 
 echo $APP_PID
 
-echo "next lunching 3000..."
+echo "astro launching 4321..."
 
 # wait till the server starts
-while ! nc -z localhost 3000; do   
+while ! nc -z localhost 4321; do   
   sleep 0.1
 done
 
 echo "run pupperteer browser testing..."
-node scripts/browser-test.js
+node .github/scripts/browser-test.js
 
 # exit if pupperteer script failed
 RESULT=$?
