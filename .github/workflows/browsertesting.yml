@@ -42,8 +42,8 @@ jobs:
         id: browser-testing
     
         run: |
-          chmod +x run-browser-testing.sh
-          ./run-browser-testing.sh
+          chmod +x .github/scripts/run-browser-testing.sh
+          ./.github/scripts/run-browser-testing.sh
 
       - name: Use the value
         id: step_two
