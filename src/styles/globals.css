@@ -101,6 +101,10 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--dl-color-purple-light);
+}
 
 input {
   padding: 2px 4px;
