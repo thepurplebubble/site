@@ -13,4 +13,4 @@ To start developing localy:
 3. make changes and preview them with the dev server
    - `ntl dev`
 
-Copyright (C) 2023 Purple Bubble
+Copyright (C) 2024 Purple Bubble
