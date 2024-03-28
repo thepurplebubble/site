@@ -69,14 +69,109 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
+  import { fade } from "astro:transitions";
+
   const cursorGradient = document.querySelector(
     ".cursor-gradient"
   ) as HTMLElement;
 
+  let mouseX = 0;
+  let mouseY = 0;
+  let velocityX = 0;
+  let velocityY = 0;
+  const easing = 0.5;
+  const smoothing = 0.05;
+  const springConstant = 0.1;
+  let isVisible = true; // Flag to track visibility
+  let fadeStartTime = 0; // Time when fadeout started (milliseconds)
+  const fadeOutDuration = 5000; // Fadeout duration in milliseconds
+  const fadeOutDelay = 5000; // Delay before fadeout starts (milliseconds)
+  const movementThreshold = 10; // Minimum movement threshold (pixels)
+  const fadeOutExponent = 2; // Exponential decay factor for fadeout
+
+  // Fade in variables
+  let fadeInStartTime = 0; // Time when fade-in started (milliseconds)
+  const fadeInDuration = 1000; // Fade-in duration in milliseconds
+  let fadeInProgress = 0; // Keep track of fade-in progress
+  let fadeInFlag = false; // Flag to track fade-in
+  let fadeInComplete = true; // Flag to track fade-in completion
+
   document.addEventListener("mousemove", (event) => {
-    cursorGradient.style.setProperty("--x", event.clientX + "px");
-    cursorGradient.style.setProperty("--y", event.clientY + "px");
+    // Update mouse position
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    fadeStartTime = 0; // Reset fade timer on mouse movement
+    isVisible = true; // Reset visibility flag on mouse movement
   });
+
+  function animate() {
+    const dx = mouseX - velocityX;
+    const dy = mouseY - velocityY;
+
+    // Update velocity with physics calculations
+    velocityX += dx * smoothing * easing + dx * springConstant;
+    velocityY += dy * smoothing * easing + dy * springConstant;
+
+    // Clamp velocity to window boundaries
+    velocityX = Math.max(0, Math.min(velocityX, window.innerWidth));
+    velocityY = Math.max(0, Math.min(velocityY, window.innerHeight));
+
+    // Check for minimal movement
+    const movement = Math.sqrt(dx * dx + dy * dy);
+    // Fade out logic based on low velocity and minimal movement
+    if (
+      Math.abs(dx) < 0.1 &&
+      Math.abs(dy) < 0.1 &&
+      movement < movementThreshold
+    ) {
+      if (isVisible) {
+        fadeStartTime = Date.now();
+        isVisible = false;
+        fadeInFlag = false; // Reset fade-in flag
+        fadeInComplete = false; // Reset fade-in completion flag
+      }
+    } else {
+      isVisible = true; // Reset visibility flag on significant movement
+      if (!fadeInFlag && !fadeInComplete) {
+        fadeInStartTime = Date.now(); // Start fade-in timer
+        fadeInFlag = true; // Set fade-in flag
+      }
+    }
+
+    // Fade out logic
+    if (!isVisible) {
+      const elapsedTime = Date.now() - fadeStartTime - fadeOutDelay;
+      if (elapsedTime > 0) {
+        const fadeProgress = Math.min(1, elapsedTime / fadeOutDuration); // Normalize progress (0 to 1)
+        const exponentialDecay = Math.pow(1 - fadeProgress, fadeOutExponent); // Exponential decay factor
+        const limitedOpacity = Math.min(0.5, exponentialDecay); // Limit opacity to 0.5
+        cursorGradient.style.opacity = limitedOpacity.toString();
+      }
+    } else {
+      if (fadeInFlag) {
+        const elapsedTime = Date.now() - fadeInStartTime;
+        fadeInProgress = Math.min(elapsedTime / fadeInDuration, 0.5); // Calculate fade-in progress
+        cursorGradient.style.opacity = fadeInProgress.toString(); // Set opacity based on progress
+      }
+
+      if (fadeInProgress === 0.5) {
+        fadeInFlag = false; // Reset fade-in flag
+        fadeInComplete = true; // Set fade-in completion flag
+      }
+    }
+
+    cursorGradient.style.setProperty("--x", velocityX + "px");
+    cursorGradient.style.setProperty("--y", velocityY + "px");
+
+    console.log(`velocityX: ${velocityX}, velocityY: ${velocityY}`);
+    console.log(`dx: ${dx}, dy: ${dy}`);
+    console.log(`movement: ${movement}`);
+    console.log(`isVisible: ${isVisible}`);
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 </script>
 
 <script>
