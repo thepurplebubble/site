@@ -6,6 +6,8 @@
     "@lottiefiles/lottie-player": "1.5.7",
     "astro": "^4.0.4",
     "axios": "^1.6.2",
+    "magick.css": "^1.0.5",
+    "normalize.css": "^8.0.1",
     "parcel": "^2.10.3",
     "qs": "^6.11.2"
   },
