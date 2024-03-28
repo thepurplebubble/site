@@ -30,6 +30,7 @@ const year = new Date().getFullYear();
     <title>{title}</title>
   </head>
   <body>
+    <div class="cursor-gradient"></div>
     <header><h1>{title}</h1></header>
     <main>
       <slot />
@@ -37,3 +38,49 @@ const year = new Date().getFullYear();
     <footer>&copy {year} Purple Bubble</footer>
   </body>
 </html>
+
+<style is:global>
+  .cursor-gradient {
+    overflow: visible;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle closest-side at var(--x) var(--y),
+      #8100e5,
+      transparent 20rem
+    );
+    background-blend-mode: multiply; /* Creates the grainy effect */
+    filter: blur(5px); /* Adjust blur amount */
+    opacity: 0.5; /* Adjust opacity */
+    pointer-events: none; /* Prevents clicks on the gradient */
+    z-index: -1; /* Ensures the gradient stays behind other elements */
+  }
+
+  form {
+    /* round the corners */
+    border-radius: 0.5rem;
+    background-color: var(--transparent-form-bg);
+  }
+
+  html {
+    --transparent-form-bg: color-mix(in srgb, var(--form-bg), #0000 50%);
+  }
+</style>
+
+<script>
+  const cursorGradient = document.querySelector(
+    ".cursor-gradient"
+  ) as HTMLElement;
+
+  document.addEventListener("mousemove", (event) => {
+    cursorGradient.style.setProperty("--x", event.clientX + "px");
+    cursorGradient.style.setProperty("--y", event.clientY + "px");
+  });
+</script>
+
+<script>
+  const header = document.querySelector("header");
+  header.style.paddingTop = getComputedStyle(header).marginTop;
+  header.style.marginTop = "0";
+</script>
