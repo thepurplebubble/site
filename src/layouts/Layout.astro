@@ -163,11 +163,6 @@ const year = new Date().getFullYear();
     cursorGradient.style.setProperty("--x", velocityX + "px");
     cursorGradient.style.setProperty("--y", velocityY + "px");
 
-    console.log(`velocityX: ${velocityX}, velocityY: ${velocityY}`);
-    console.log(`dx: ${dx}, dy: ${dy}`);
-    console.log(`movement: ${movement}`);
-    console.log(`isVisible: ${isVisible}`);
-
     requestAnimationFrame(animate);
   }
 
