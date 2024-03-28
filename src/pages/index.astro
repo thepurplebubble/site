@@ -1,55 +1,78 @@
 ---
-import EmailForm from "../components/Email-Form.astro";
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Features from "../components/Features.astro";
-import Notification from "../components/Notification.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/index.css";
 ---
 
 <Layout title="Purple Bubble">
-  <main>
-    <div>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/@lottiefiles/lottie-player@1.6.0/dist/lottie-player.js"
-      ></script>
+  <section><p>We are Purple Bubble</p></section>
+  <section>
+    <p>
+      Made up of teens from around the globe we hope to create a new messageing
+      app that will change the way you think about privacy and annonimity. We
+      want to revolutionize the way messaging apps work and make it so that
+      instead of you being the product, you are the user and the app works for
+      you.
+    </p>
 
-      <div class="home-container">
-        <Hero />
-        <div class="chevron-container">
-          <button class="chevron-button" id="chevron-button"></button>
-        </div>
-        <Features />
+    <p>
+      We are currently in the early stages of development and are looking for
+      people to help us test our app. If you are interested in helping us test
+      our app please sign up below.
+    </p>
+  </section>
+  <section>
+    <form
+      action="https://postal.hackclub.com/subscribe"
+      method="POST"
+      accept-charset="utf-8"
+    >
+      <label for="name">Name</label><br />
+      <input type="text" name="name" id="name" placeholder="R. M. Bubbler" />
+      <br />
+      <label for="email">Email</label><br />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="bubbler@purplebubble.org"
+      /><br /><br />
+
+      <span>
+        <input type="checkbox" name="gdpr" id="gdpr" />
+        <strong>Marketing permission</strong>: I give my consent to Purple
+        Bubble to be in touch with me via email using the information I have
+        provided in this form for the purpose of news, updates and marketing.</span
+      >
+      <br /><br />
+      <span
+        ><strong>What to expect</strong>: If you wish to withdraw your consent
+        and stop hearing from us, simply click the unsubscribe link at the
+        bottom of every email we send or contact us at <a
+          href="mailto:%74e%61m%40pu%72p%6Ceb%75bble.org"
+          >t&#101;am&#64;purplebub&#98;le&#46;org</a
+        >. We value and respect your personal data and privacy. To view our
+        privacy policy, please visit our website. By submitting this form, you
+        agree that we may process your information in accordance with these
+        terms.</span
+      >
+      <br /><br /><div style="display:none;">
+        <label for="hp">HP</label><br />
+        <input type="text" name="hp" id="hp" />
       </div>
-    </div>
-  </main>
-  <EmailForm />
-  <Notification />
-  <Footer />
+      <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
+      <input type="hidden" name="subform" value="yes" />
+      <input type="submit" name="submit" id="submit" />
+    </form>
+  </section>
 </Layout>
 
-<script>
-  const button = document.getElementById("email-form-button");
-  const scroll = document.getElementById("chevron-button");
-  const form = document.getElementById("email-form");
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-  button.addEventListener("click", () => {
-    // scroll to email form component
-    form.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "nearest",
-    });
-  });
-  scroll.addEventListener("click", () => {
-    // scroll to one page down
-    window.scrollBy({
-      top: window.innerHeight,
-      left: 0,
-      behavior: "smooth",
-    });
-  });
-</script>
-
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+</style>
