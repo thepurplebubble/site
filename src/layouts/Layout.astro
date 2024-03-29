@@ -81,8 +81,6 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
-  import { fade } from "astro:transitions";
-
   const cursorGradient = document.querySelector(
     ".cursor-gradient"
   ) as HTMLElement;
@@ -145,7 +143,14 @@ const year = new Date().getFullYear();
     } else {
       isVisible = true; // Reset visibility flag on significant movement
       if (!fadeInFlag && !fadeInComplete) {
-        fadeInStartTime = Date.now(); // Start fade-in timer
+        fadeInStartTime =
+          cursorGradient.style.opacity == "0"
+            ? Date.now()
+            : Date.now() -
+              (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
+        console.log(
+          (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration
+        );
         fadeInFlag = true; // Set fade-in flag
       }
     }
