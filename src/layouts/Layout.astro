@@ -27,6 +27,11 @@ const year = new Date().getFullYear();
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <title>{title}</title>
   </head>
   <body>
@@ -35,7 +40,14 @@ const year = new Date().getFullYear();
     <main>
       <slot />
     </main>
-    <footer>&copy {year} Purple Bubble</footer>
+    <footer>
+      <p>&copy {year} Purple Bubble</p>
+      <p>
+        Purple Bubble is fiscally sponsored by The Hack Foundation (d.b.a. Hack
+        Club), a 501(c)(3) nonprofit (EIN: 81-2908499). Any donations made to
+        Purple Bubble are tax deductible.
+      </p>
+    </footer>
   </body>
 </html>
 
