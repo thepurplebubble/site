@@ -15,9 +15,9 @@ import Layout from "../layouts/Layout.astro";
     <p>
       We're currently in the early stages of development and are looking for
       people to help us test our app. If you're interested in helping us test
-      our app, please sign up for our mailing list below. (We promise not to send
-      you any spam, only important milestones which will result in less than 4-5 emails a
-      year)
+      our app, please sign up for our mailing list below. (We promise not to
+      send you any spam, only important milestones which will result in less
+      than 4-5 emails a year)
     </p>
   </section>
   <section>
@@ -27,7 +27,13 @@ import Layout from "../layouts/Layout.astro";
       accept-charset="utf-8"
     >
       <label for="name">Name</label><br />
-      <input type="text" name="name" id="name" placeholder="R. M. Bubbler" />
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="R. M. Bubbler"
+        required
+      />
       <br />
       <label for="email">Email</label><br />
       <input
@@ -35,10 +41,11 @@ import Layout from "../layouts/Layout.astro";
         name="email"
         id="email"
         placeholder="bubbler@purplebubble.org"
+        required
       /><br /><br />
 
       <span>
-        <input type="checkbox" name="gdpr" id="gdpr" />
+        <input type="checkbox" name="gdpr" id="gdpr" required />
         <strong>Marketing permission</strong>: I give my consent to Purple
         Bubble to be in touch with me via email using the information I have
         provided in this form for the purpose of news, updates and marketing.
@@ -59,15 +66,16 @@ import Layout from "../layouts/Layout.astro";
       </div>
       <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
       <input type="hidden" name="subform" value="yes" />
-      <button>Subscribe</button>
+      <button id="subscribe" type="submit">Subscribe</button>
     </form>
   </section>
   <section>
     <p>
       If you would like to donate to Purple Bubble, then you can <a
-        href="https://hcb.hackclub.com/donations/start/purplebubble">donate through HCB.</a
-      >  All donations will go towards the development of the app and
-      are greatly appreciated and tax deductible.
+        href="https://hcb.hackclub.com/donations/start/purplebubble"
+        >donate through HCB.</a
+      > All donations will go towards the development of the app and are greatly
+      appreciated and tax deductible.
     </p>
     <p>
       You may contact the Purple Bubble team in a couple ways:
@@ -80,8 +88,9 @@ import Layout from "../layouts/Layout.astro";
           >
         </li>
         <li>
-         Highschoolers only: join the <a href="https://hackclub.com/slack/">Hack Club Slack</a> and join the
-          #purplebubble channel
+          Highschoolers only: join the <a href="https://hackclub.com/slack/"
+            >Hack Club Slack</a
+          > and join the #purplebubble channel
         </li>
       </ul>
     </p>
