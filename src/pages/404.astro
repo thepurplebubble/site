@@ -4,7 +4,25 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="404" fiscalSponsor="false">
   <section>
-    <p>Page not found</p>
-    <a href="/">Go back</a>
+    <p>Sending you home</p>
   </section>
 </Layout>
+
+<style>
+  section {
+    text-align: center;
+  }
+</style>
+
+<script>
+  // count down to redirect
+  let count = 4;
+  const interval = setInterval(() => {
+    count--;
+    if (count === 0) {
+      clearInterval(interval);
+      window.location.href = "/";
+    }
+    document.querySelector("p").textContent = `Redirecting in ${count}...`;
+  }, 1000);
+</script>
