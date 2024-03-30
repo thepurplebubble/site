@@ -4,9 +4,12 @@ import "magick.css";
 
 interface Props {
   title: string;
+  fiscalSponsor: string;
 }
 
 const { title } = Astro.props;
+
+const fiscalSponsor = Astro.props.fiscalSponsor === "true" ? true : false;
 
 const year = new Date().getFullYear();
 ---
@@ -78,152 +81,163 @@ const year = new Date().getFullYear();
     </main>
     <footer>
       <p>&copy {year} Purple Bubble</p>
-      <p>
-        Purple Bubble is fiscally sponsored by The Hack Foundation (d.b.a. Hack
-        Club), a 501(c)(3) nonprofit (EIN: 81-2908499). Any donations made to
-        Purple Bubble are tax deductible.
-      </p>
+      {
+        fiscalSponsor && (
+          <p>
+            Purple Bubble is fiscally sponsored by The Hack Foundation (d.b.a.
+            Hack Club), a 501(c)(3) nonprofit (EIN: 81-2908499). Any donations
+            made to Purple Bubble are tax deductible.
+          </p>
+        )
+      }
     </footer>
   </body>
+
+  <style is:global>
+    .cursor-gradient {
+      overflow: visible;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle closest-side at var(--x) var(--y),
+        #8100e5,
+        transparent 20rem
+      );
+      background-blend-mode: multiply; /* Creates the grainy effect */
+      filter: blur(5px); /* Adjust blur amount */
+      opacity: 0.5; /* Adjust opacity */
+      pointer-events: none; /* Prevents clicks on the gradient */
+      z-index: -1; /* Ensures the gradient stays behind other elements */
+    }
+
+    form {
+      /* round the corners */
+      border-radius: 0.5rem;
+      background-color: var(--transparent-form-bg);
+    }
+
+    html {
+      --transparent-form-bg: color-mix(in srgb, var(--form-bg), #0000 50%);
+    }
+
+    /* make the footer be at the bottom of the page if there isn't enough content to push it down */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  </style>
+
+  <script>
+    const cursorGradient = document.querySelector(
+      ".cursor-gradient"
+    ) as HTMLElement;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let velocityX = 0;
+    let velocityY = 0;
+    const easing = 0.5;
+    const smoothing = 0.05;
+    const springConstant = 0.1;
+    let isVisible = true; // Flag to track visibility
+    let fadeStartTime = 0; // Time when fadeout started (milliseconds)
+    const fadeOutDuration = 5000; // Fadeout duration in milliseconds
+    const fadeOutDelay = 5000; // Delay before fadeout starts (milliseconds)
+    const movementThreshold = 10; // Minimum movement threshold (pixels)
+    const fadeOutExponent = 2; // Exponential decay factor for fadeout
+
+    // Fade in variables
+    let fadeInStartTime = 0; // Time when fade-in started (milliseconds)
+    const fadeInDuration = 1000; // Fade-in duration in milliseconds
+    let fadeInProgress = 0; // Keep track of fade-in progress
+    let fadeInFlag = false; // Flag to track fade-in
+    let fadeInComplete = true; // Flag to track fade-in completion
+
+    document.addEventListener("mousemove", (event) => {
+      // Update mouse position
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      fadeStartTime = 0; // Reset fade timer on mouse movement
+      isVisible = true; // Reset visibility flag on mouse movement
+    });
+
+    function animate() {
+      const dx = mouseX - velocityX;
+      const dy = mouseY - velocityY;
+
+      // Update velocity with physics calculations
+      velocityX += dx * smoothing * easing + dx * springConstant;
+      velocityY += dy * smoothing * easing + dy * springConstant;
+
+      // Clamp velocity to window boundaries
+      velocityX = Math.max(0, Math.min(velocityX, window.innerWidth));
+      velocityY = Math.max(0, Math.min(velocityY, window.innerHeight));
+
+      // Check for minimal movement
+      const movement = Math.sqrt(dx * dx + dy * dy);
+      // Fade out logic based on low velocity and minimal movement
+      if (
+        Math.abs(dx) < 0.1 &&
+        Math.abs(dy) < 0.1 &&
+        movement < movementThreshold
+      ) {
+        if (isVisible) {
+          fadeStartTime = Date.now();
+          isVisible = false;
+          fadeInFlag = false; // Reset fade-in flag
+          fadeInComplete = false; // Reset fade-in completion flag
+        }
+      } else {
+        isVisible = true; // Reset visibility flag on significant movement
+        if (!fadeInFlag && !fadeInComplete) {
+          fadeInStartTime =
+            cursorGradient.style.opacity == "0"
+              ? Date.now()
+              : Date.now() -
+                (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
+          console.log(
+            (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration
+          );
+          fadeInFlag = true; // Set fade-in flag
+        }
+      }
+
+      // Fade out logic
+      if (!isVisible) {
+        const elapsedTime = Date.now() - fadeStartTime - fadeOutDelay;
+        if (elapsedTime > 0) {
+          const fadeProgress = Math.min(1, elapsedTime / fadeOutDuration); // Normalize progress (0 to 1)
+          const exponentialDecay = Math.pow(1 - fadeProgress, fadeOutExponent); // Exponential decay factor
+          const limitedOpacity = Math.min(0.5, exponentialDecay); // Limit opacity to 0.5
+          cursorGradient.style.opacity = limitedOpacity.toString();
+        }
+      } else {
+        if (fadeInFlag) {
+          const elapsedTime = Date.now() - fadeInStartTime;
+          fadeInProgress = Math.min(elapsedTime / fadeInDuration, 0.5); // Calculate fade-in progress
+          cursorGradient.style.opacity = fadeInProgress.toString(); // Set opacity based on progress
+        }
+
+        if (fadeInProgress === 0.5) {
+          fadeInFlag = false; // Reset fade-in flag
+          fadeInComplete = true; // Set fade-in completion flag
+        }
+      }
+
+      cursorGradient.style.setProperty("--x", velocityX + "px");
+      cursorGradient.style.setProperty("--y", velocityY + "px");
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+  <script>
+    const header = document.querySelector("header");
+    header.style.paddingTop = getComputedStyle(header).marginTop;
+    header.style.marginTop = "0";
+  </script>
 </html>
-
-<style is:global>
-  .cursor-gradient {
-    overflow: visible;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      circle closest-side at var(--x) var(--y),
-      #8100e5,
-      transparent 20rem
-    );
-    background-blend-mode: multiply; /* Creates the grainy effect */
-    filter: blur(5px); /* Adjust blur amount */
-    opacity: 0.5; /* Adjust opacity */
-    pointer-events: none; /* Prevents clicks on the gradient */
-    z-index: -1; /* Ensures the gradient stays behind other elements */
-  }
-
-  form {
-    /* round the corners */
-    border-radius: 0.5rem;
-    background-color: var(--transparent-form-bg);
-  }
-
-  html {
-    --transparent-form-bg: color-mix(in srgb, var(--form-bg), #0000 50%);
-  }
-</style>
-
-<script>
-  const cursorGradient = document.querySelector(
-    ".cursor-gradient",
-  ) as HTMLElement;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let velocityX = 0;
-  let velocityY = 0;
-  const easing = 0.5;
-  const smoothing = 0.05;
-  const springConstant = 0.1;
-  let isVisible = true; // Flag to track visibility
-  let fadeStartTime = 0; // Time when fadeout started (milliseconds)
-  const fadeOutDuration = 5000; // Fadeout duration in milliseconds
-  const fadeOutDelay = 5000; // Delay before fadeout starts (milliseconds)
-  const movementThreshold = 10; // Minimum movement threshold (pixels)
-  const fadeOutExponent = 2; // Exponential decay factor for fadeout
-
-  // Fade in variables
-  let fadeInStartTime = 0; // Time when fade-in started (milliseconds)
-  const fadeInDuration = 1000; // Fade-in duration in milliseconds
-  let fadeInProgress = 0; // Keep track of fade-in progress
-  let fadeInFlag = false; // Flag to track fade-in
-  let fadeInComplete = true; // Flag to track fade-in completion
-
-  document.addEventListener("mousemove", (event) => {
-    // Update mouse position
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-    fadeStartTime = 0; // Reset fade timer on mouse movement
-    isVisible = true; // Reset visibility flag on mouse movement
-  });
-
-  function animate() {
-    const dx = mouseX - velocityX;
-    const dy = mouseY - velocityY;
-
-    // Update velocity with physics calculations
-    velocityX += dx * smoothing * easing + dx * springConstant;
-    velocityY += dy * smoothing * easing + dy * springConstant;
-
-    // Clamp velocity to window boundaries
-    velocityX = Math.max(0, Math.min(velocityX, window.innerWidth));
-    velocityY = Math.max(0, Math.min(velocityY, window.innerHeight));
-
-    // Check for minimal movement
-    const movement = Math.sqrt(dx * dx + dy * dy);
-    // Fade out logic based on low velocity and minimal movement
-    if (
-      Math.abs(dx) < 0.1 &&
-      Math.abs(dy) < 0.1 &&
-      movement < movementThreshold
-    ) {
-      if (isVisible) {
-        fadeStartTime = Date.now();
-        isVisible = false;
-        fadeInFlag = false; // Reset fade-in flag
-        fadeInComplete = false; // Reset fade-in completion flag
-      }
-    } else {
-      isVisible = true; // Reset visibility flag on significant movement
-      if (!fadeInFlag && !fadeInComplete) {
-        fadeInStartTime =
-          cursorGradient.style.opacity == "0"
-            ? Date.now()
-            : Date.now() -
-              (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
-        console.log(
-          (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration,
-        );
-        fadeInFlag = true; // Set fade-in flag
-      }
-    }
-
-    // Fade out logic
-    if (!isVisible) {
-      const elapsedTime = Date.now() - fadeStartTime - fadeOutDelay;
-      if (elapsedTime > 0) {
-        const fadeProgress = Math.min(1, elapsedTime / fadeOutDuration); // Normalize progress (0 to 1)
-        const exponentialDecay = Math.pow(1 - fadeProgress, fadeOutExponent); // Exponential decay factor
-        const limitedOpacity = Math.min(0.5, exponentialDecay); // Limit opacity to 0.5
-        cursorGradient.style.opacity = limitedOpacity.toString();
-      }
-    } else {
-      if (fadeInFlag) {
-        const elapsedTime = Date.now() - fadeInStartTime;
-        fadeInProgress = Math.min(elapsedTime / fadeInDuration, 0.5); // Calculate fade-in progress
-        cursorGradient.style.opacity = fadeInProgress.toString(); // Set opacity based on progress
-      }
-
-      if (fadeInProgress === 0.5) {
-        fadeInFlag = false; // Reset fade-in flag
-        fadeInComplete = true; // Set fade-in completion flag
-      }
-    }
-
-    cursorGradient.style.setProperty("--x", velocityX + "px");
-    cursorGradient.style.setProperty("--y", velocityY + "px");
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-
-<script>
-  const header = document.querySelector("header");
-  header.style.paddingTop = getComputedStyle(header).marginTop;
-  header.style.marginTop = "0";
-</script>
