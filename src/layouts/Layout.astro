@@ -27,19 +27,46 @@ const year = new Date().getFullYear();
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="194x194" href="/favicon/favicon-194x194.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="shortcut icon" href="/favicon/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Purple Bubble">
-    <meta name="application-name" content="Purple Bubble">
-    <meta name="msapplication-TileColor" content="#9f00a7">
-    <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">
-    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="194x194"
+      href="/favicon/favicon-194x194.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/favicon/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="Purple Bubble" />
+    <meta name="application-name" content="Purple Bubble" />
+    <meta name="msapplication-TileColor" content="#9f00a7" />
+    <meta
+      name="msapplication-TileImage"
+      content="/favicon/mstile-144x144.png"
+    />
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
 
     <title>{title}</title>
   </head>
@@ -91,7 +118,7 @@ const year = new Date().getFullYear();
 
 <script>
   const cursorGradient = document.querySelector(
-    ".cursor-gradient"
+    ".cursor-gradient",
   ) as HTMLElement;
 
   let mouseX = 0;
@@ -158,7 +185,7 @@ const year = new Date().getFullYear();
             : Date.now() -
               (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
         console.log(
-          (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration
+          (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration,
         );
         fadeInFlag = true; // Set fade-in flag
       }
