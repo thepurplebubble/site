@@ -75,7 +75,7 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <div id="cursor-gradients"><div class="cursor-gradient"></div></div>
-    <header><h1>{title}</h1></header>
+    <header><h1 class="artz">{title}</h1></header>
     <main>
       <slot />
     </main>
@@ -126,6 +126,19 @@ const year = new Date().getFullYear();
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+    }
+  </style>
+
+  <style>
+    @font-face {
+      font-family: "Artz";
+      src: url(/fonts/HWTArtz.otf) format("opentype");
+    }
+
+    .artz {
+      font-family: "Artz", sans-serif;
+      letter-spacing: 0.022em;
+      font-size: 6rem;
     }
   </style>
 
