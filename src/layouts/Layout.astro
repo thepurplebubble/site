@@ -63,13 +63,13 @@ const year = new Date().getFullYear();
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <meta name="apple-mobile-web-app-title" content="Purple Bubble" />
     <meta name="application-name" content="Purple Bubble" />
-    <meta name="msapplication-TileColor" content="#9f00a7" />
+    <meta name="msapplication-TileColor" content="#8100e5" />
     <meta
       name="msapplication-TileImage"
       content="/favicon/mstile-144x144.png"
     />
     <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#8100e5" />
 
     <title>{title}</title>
   </head>
@@ -144,7 +144,7 @@ const year = new Date().getFullYear();
 
   <script>
     const cursorGradient = document.querySelector(
-      ".cursor-gradient",
+      ".cursor-gradient"
     ) as HTMLElement;
 
     let autoGradientPositions: {
@@ -212,7 +212,7 @@ const year = new Date().getFullYear();
               : Date.now() -
                 (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
           console.log(
-            (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration,
+            (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration
           );
           fadeInFlag = true; // Set fade-in flag
         }
@@ -274,8 +274,8 @@ const year = new Date().getFullYear();
         Math.min(
           autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
             .velocity.x,
-          window.innerWidth,
-        ),
+          window.innerWidth
+        )
       );
       autoGradientPositions[
         gradient.id.replace("cursor-gradient-", "")
@@ -284,19 +284,19 @@ const year = new Date().getFullYear();
         Math.min(
           autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
             .velocity.y,
-          window.innerHeight,
-        ),
+          window.innerHeight
+        )
       );
 
       gradient.style.setProperty(
         "--x",
         autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
-          .velocity.x + "px",
+          .velocity.x + "px"
       );
       gradient.style.setProperty(
         "--y",
         autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
-          .velocity.y + "px",
+          .velocity.y + "px"
       );
 
       requestAnimationFrame(() => animateAuto(gradient));
