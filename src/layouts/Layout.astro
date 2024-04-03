@@ -74,7 +74,7 @@ const year = new Date().getFullYear();
     <title>{title}</title>
   </head>
   <body>
-    <div class="cursor-gradient"></div>
+    <div id="cursor-gradients"><div class="cursor-gradient"></div></div>
     <header><h1>{title}</h1></header>
     <main>
       <slot />
@@ -134,6 +134,14 @@ const year = new Date().getFullYear();
       ".cursor-gradient"
     ) as HTMLElement;
 
+    let autoGradientPositions: {
+      pos: { x: number; y: number };
+      velocity: { x: number; y: number };
+    }[] = [];
+    const autoEasing = 0.03;
+    const autoSmoothing = 0.001;
+    const autoSpringConstant = 0.005;
+
     let mouseX = 0;
     let mouseY = 0;
     let velocityX = 0;
@@ -155,14 +163,7 @@ const year = new Date().getFullYear();
     let fadeInFlag = false; // Flag to track fade-in
     let fadeInComplete = true; // Flag to track fade-in completion
 
-    document.addEventListener("mousemove", (event) => {
-      // Update mouse position
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-      fadeStartTime = 0; // Reset fade timer on mouse movement
-      isVisible = true; // Reset visibility flag on mouse movement
-    });
-
+    // animations
     function animate() {
       const dx = mouseX - velocityX;
       const dy = mouseY - velocityY;
@@ -232,7 +233,122 @@ const year = new Date().getFullYear();
       requestAnimationFrame(animate);
     }
 
-    animate();
+    async function animateAuto(gradient: HTMLElement) {
+      const dx =
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")].pos
+          .x -
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+          .velocity.x;
+      const dy =
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")].pos
+          .y -
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+          .velocity.y;
+
+      // Update velocity with physics calculations
+      autoGradientPositions[
+        gradient.id.replace("cursor-gradient-", "")
+      ].velocity.x += dx * autoSmoothing * autoEasing + dx * autoSpringConstant;
+      autoGradientPositions[
+        gradient.id.replace("cursor-gradient-", "")
+      ].velocity.y += dy * autoSmoothing * autoEasing + dy * autoSpringConstant;
+
+      // Clamp velocity to window boundaries
+      autoGradientPositions[
+        gradient.id.replace("cursor-gradient-", "")
+      ].velocity.x = Math.max(
+        0,
+        Math.min(
+          autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+            .velocity.x,
+          window.innerWidth
+        )
+      );
+      autoGradientPositions[
+        gradient.id.replace("cursor-gradient-", "")
+      ].velocity.y = Math.max(
+        0,
+        Math.min(
+          autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+            .velocity.y,
+          window.innerHeight
+        )
+      );
+
+      gradient.style.setProperty(
+        "--x",
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+          .velocity.x + "px"
+      );
+      gradient.style.setProperty(
+        "--y",
+        autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
+          .velocity.y + "px"
+      );
+
+      requestAnimationFrame(() => animateAuto(gradient));
+    }
+
+    // if mobile device, don't show the cursor
+    if (!window.matchMedia("(pointer: coarse)").matches) {
+      document.addEventListener("mousemove", (event) => {
+        // Update mouse position
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+        fadeStartTime = 0; // Reset fade timer on mouse movement
+        isVisible = true; // Reset visibility flag on mouse movement
+      });
+
+      animate();
+    } else {
+      // make a random amount of circles between 2 and 5 and add them to the cursor-gradients div
+      const numCircles = Math.floor(Math.random() * 4) + 2;
+      for (let i = 0; i < numCircles; i++) {
+        const circle = document.createElement("div");
+        circle.classList.add("cursor-gradient");
+        circle.id = `cursor-gradient-${i}`;
+
+        // set the position of the circle to a random position on the screen
+        autoGradientPositions.push({
+          pos: {
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+          },
+          velocity: {
+            x: Math.random() * window.innerHeight,
+            y: Math.random() * window.innerHeight,
+          },
+        });
+
+        // set the position of the circle to the random position
+        circle.style.setProperty("--x", autoGradientPositions[i].pos.x + "px");
+        circle.style.setProperty("--y", autoGradientPositions[i].pos.y + "px");
+
+        document.getElementById("cursor-gradients").appendChild(circle);
+      }
+
+      autoGradientPositions.forEach((gradient, i) => {
+        animateAuto(document.getElementById(`cursor-gradient-${i}`));
+      });
+
+      // randomize the position of the circles every 5 seconds
+      setInterval(() => {
+        autoGradientPositions.forEach((_, i) => {
+          autoGradientPositions[i] = {
+            pos: {
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            },
+            velocity: {
+              x: autoGradientPositions[i].velocity.x,
+              y: autoGradientPositions[i].velocity.y,
+            },
+          };
+
+          console.log(autoGradientPositions);
+        });
+      }, 8000);
+    }
   </script>
 
   <script>
