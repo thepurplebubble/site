@@ -144,7 +144,7 @@ const year = new Date().getFullYear();
 
   <script>
     const cursorGradient = document.querySelector(
-      ".cursor-gradient"
+      ".cursor-gradient",
     ) as HTMLElement;
 
     let autoGradientPositions: {
@@ -212,7 +212,7 @@ const year = new Date().getFullYear();
               : Date.now() -
                 (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration; // Start fade-in timer
           console.log(
-            (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration
+            (1 - Number(cursorGradient.style.opacity) * 2) * fadeInDuration,
           );
           fadeInFlag = true; // Set fade-in flag
         }
@@ -274,8 +274,8 @@ const year = new Date().getFullYear();
         Math.min(
           autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
             .velocity.x,
-          window.innerWidth
-        )
+          window.innerWidth,
+        ),
       );
       autoGradientPositions[
         gradient.id.replace("cursor-gradient-", "")
@@ -284,19 +284,19 @@ const year = new Date().getFullYear();
         Math.min(
           autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
             .velocity.y,
-          window.innerHeight
-        )
+          window.innerHeight,
+        ),
       );
 
       gradient.style.setProperty(
         "--x",
         autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
-          .velocity.x + "px"
+          .velocity.x + "px",
       );
       gradient.style.setProperty(
         "--y",
         autoGradientPositions[gradient.id.replace("cursor-gradient-", "")]
-          .velocity.y + "px"
+          .velocity.y + "px",
       );
 
       requestAnimationFrame(() => animateAuto(gradient));
