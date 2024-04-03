@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened]
     branches: [main]
 
 jobs:
@@ -13,6 +14,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.sha }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
