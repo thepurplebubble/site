@@ -1,55 +1,95 @@
 ---
-import EmailForm from "../components/Email-Form.astro";
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Features from "../components/Features.astro";
-import Notification from "../components/Notification.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/index.css";
 ---
 
-<Layout title="Purple Bubble">
-  <main>
-    <div>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/@lottiefiles/lottie-player@1.6.0/dist/lottie-player.js"
-      ></script>
+<Layout title="Purple Bubble" fiscalSponsor="true">
+  <section>
+    <h2>Calling all Bubblers!</h2>
+    <p>
+      We're Purple Bubble, a crew of teens on a mission to make messaging epic
+      again! Tired of feeling like the product in those other apps? We get it.
+      That's why we're building something new: an app that puts YOU in control.
+      No ads, no data mining, no creepy algorithms. Just you, your friends, and
+      a whole lot of fun.
+    </p>
+  </section>
+  <section>
+    <h2>Ready to peek behind the curtain?</h2>
+    <p>
+      We're in the super-early stages (think building a pillow fort!), and we're
+      looking for awesome testers to join our inner circle. Sign up below to get
+      the scoop on all things Purple Bubble (promise it'll be way more exciting
+      than your dentist's newsletter - no spam, just 4-5 super cool updates a
+      year).
+    </p>
+  </section>
+  <section>
+    <form
+      action="https://postal.hackclub.com/subscribe"
+      method="POST"
+      accept-charset="utf-8"
+    >
+      <label for="name">Name</label><br />
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Your nom de guerre"
+        required
+      />
+      <br />
+      <label for="email">Email</label><br />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Your super secret email"
+        required
+      /><br /><br />
 
-      <div class="home-container">
-        <Hero />
-        <div class="chevron-container">
-          <button class="chevron-button" id="chevron-button"></button>
-        </div>
-        <Features />
+      <span>
+        <input type="checkbox" name="gdpr" id="gdpr" required />
+        I want to stay in the loop about Purple Bubble with news, updates, and maybe
+        even a secret message or two. (You can unsubscribe anytime with a tap!)
+      </span>
+
+      <br /><br /><div style="display:none;">
+        <label for="hp">HP</label><br />
+        <input type="text" name="hp" id="hp" />
       </div>
-    </div>
-  </main>
-  <EmailForm />
-  <Notification />
-  <Footer />
+      <input type="hidden" name="list" value="xjAecLBfJ3HdnmuBXhvkfg" />
+      <input type="hidden" name="subform" value="yes" />
+      <button id="subscribe" type="submit">Subscribe</button>
+    </form>
+  </section>
+  <section>
+    <h3>Want to be a supporter?</h3>
+    <p>
+      Donations can be made <a
+        href="https://hcb.hackclub.com/donations/start/purplebubble">here</a
+      >, and help accelerate development! Every penny counts (and hey, they're
+      tax-deductible!).
+    </p>
+  </section>
+  <section>
+    <h2>Want to chat? Got questions?</h2>
+    <p>
+      Drop us a line at
+      <a href="mailto:%74e%61m%40pu%72p%6Ceb%75bble.org"
+        >t&#101;am&#64;purplebub&#98;le&#46;org</a
+      > - 💖 we love making new friends!
+    </p>
+  </section>
 </Layout>
 
-<script>
-  const button = document.getElementById("email-form-button");
-  const scroll = document.getElementById("chevron-button");
-  const form = document.getElementById("email-form");
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-  button.addEventListener("click", () => {
-    // scroll to email form component
-    form.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "nearest",
-    });
-  });
-  scroll.addEventListener("click", () => {
-    // scroll to one page down
-    window.scrollBy({
-      top: window.innerHeight,
-      left: 0,
-      behavior: "smooth",
-    });
-  });
-</script>
-
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+</style>
