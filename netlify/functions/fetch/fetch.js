@@ -20,18 +20,41 @@ exports.handler = async function (event, context) {
       boolean,
     });
 
-    // Make the cURL request using axios
+
+exports.handler = async function (event, context) {
+  try {
+    // Parse the incoming form data from the request body
+    const { name, email, gdpr, hp, list, subform } = JSON.parse(event.body);
+
+    // Construct the email data for Catapult Mailer
+    const data = {
+      personalizations: [
+        {
+          to: [{ email: email }], // Use the email from the form submission as the recipient
+          subject: "New RSVP Submission",
+        },
+      ],
+      from: { email: "team@purplebubble.org" }, // Replace with your sender email
+      content: [
+        {
+          type: "text/plain",
+          value: `Name: ${name}\nEmail: ${email}\nGDPR: ${gdpr}\nHP: ${hp}\nList: ${list}\nSubform: ${subform}`,
+        },
+      ],
+    };
+
+    // Make the request to Catapult Mailer using Cloudflare Email
     const response = await axios.post(
-      "https://postal.hackclub.com/subscribe",
+      "https://api.mailchannels.net/tx/v1/send",
       data,
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
-      },
+      }
     );
 
-    // log the response for debugging purposes
+    // Log the response for debugging purposes
     console.log(response.data);
 
     // Return the response from the external API
@@ -40,9 +63,10 @@ exports.handler = async function (event, context) {
       body: JSON.stringify(response.data),
     };
   } catch (error) {
-    // Return an error response if something goes wrong
-    // log the error for debugging purposes
+    // Log the error for debugging purposes
     console.log(error);
+
+    // Return an error response if something goes wrong
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Internal Server Error" }),
