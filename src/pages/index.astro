@@ -7,19 +7,19 @@ if (Astro.request.method === "POST") {
     const data = await Astro.request.formData();
     const name = data.get("name");
     const email = data.get("email");
-    const response = await fetch('https://catapult.purplebubble.org/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    });
+    fetch('https://catapult.purplebubble.org/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: 'example@gmail.com', name: 'Example User' }),
+    })
     const jsondata = await response.json();
     if (jsondata.ok = true){
       //do nothing
     }else{
       error = jsondata.error;
     }
-    body = JSON.stringify({ name: name, email: email})
   }
   catch (error) {
     if (error instanceof Error) {
