@@ -102,13 +102,13 @@ import Layout from "../layouts/Layout.astro";
     
     const data = {
       email: formData.get('email'),
-      name: formData.get('name'),
+      name: formData.get('name')
       //gdpr: formData.get('gdpr'),
       //hp: formData.get('hp'),
       //list: formData.get('list'),
       //subform: formData.get('subform')
     };
-    body: JSON.stringify({ email: 'example@gmail.com', name: 'Example User' }),
+    //body: JSON.stringify({ email: 'example@gmail.com', name: 'Example User' }),
 
     try {
       const response = await fetch('https://purplebubblewebsite.netlify.app/api/subscribe', {
