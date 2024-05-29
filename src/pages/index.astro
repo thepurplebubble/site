@@ -29,7 +29,9 @@ if (Astro.request.method === "POST") {
   }
 }
 <Layout>
-  {error && <p class="text-red-500">Error: {error}</p>}
+  <p>
+    Error: {error}
+  </p>
 </Layout>
 
 ---
