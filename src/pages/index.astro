@@ -23,9 +23,8 @@ if (Astro.request.method === "POST") {
   }
   catch (error) {
     if (error instanceof Error) {
-      {
 			error && (
-				<p>Error {error}</p>
+				<p class="text-red-500">Error: {error}</p>
 			)
     }
   }
