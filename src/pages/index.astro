@@ -101,16 +101,17 @@ import Layout from "../layouts/Layout.astro";
     const formData = new FormData(form);
     
     const data = {
-      name: formData.get('name'),
       email: formData.get('email'),
-      gdpr: formData.get('gdpr'),
-      hp: formData.get('hp'),
-      list: formData.get('list'),
-      subform: formData.get('subform')
+      name: formData.get('name'),
+      //gdpr: formData.get('gdpr'),
+      //hp: formData.get('hp'),
+      //list: formData.get('list'),
+      //subform: formData.get('subform')
     };
-    
+    body: JSON.stringify({ email: 'example@gmail.com', name: 'Example User' }),
+
     try {
-      const response = await fetch('https://catapult.purplebubble.org/dashboard', {
+      const response = await fetch('https://purplebubblewebsite.netlify.app/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
