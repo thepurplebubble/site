@@ -10,9 +10,16 @@ if (Astro.request.method === "POST") {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body = JSON.stringify({ name: name, email: email})
-      });
+        }
+    });
+    const jsondata = await response.json();
+    if (jsondata.ok = true){
+      //do nothing
+    }else{
+      error = jsondata.error;
+    }
+    body = await request.body;
+    body = JSON.stringify({ name: name, email: email})
   }
   catch (error) {
     if (error instanceof Error) {
