@@ -1,39 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-let error = null;
-
+let error;
 if (Astro.request.method === "POST") {
   try {
+    body = await request.body;
     const data = await Astro.request.formData();
     const name = data.get("name");
     const email = data.get("email");
     const response = await fetch('https://catapult.purplebubble.org/api/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name: name, email: email })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
     });
     const jsondata = await response.json();
-
-    if (!jsondata.ok) {
+    if (jsondata.ok = true){
+      //do nothing
+    }else{
       error = jsondata.error;
     }
-  } catch (e) {
-    if (e instanceof Error) {
-      error = e.message;
-    } else {
-      error = "An unknown error occurred";
+    body = JSON.stringify({ name: name, email: email})
+  }
+  catch (error) {
+    if (error instanceof Error) {
+			error && (
+				<p class="text-red-500">Error: {error}</p>
+			)
     }
   }
 }
 ---
-<Layout>
-  <p>
-    Error: {error}
-  </p>
-</Layout>
+
 <Layout title="Purple Bubble" fiscalSponsor="true">
   <section>
     <h2>Calling all Bubblers!</h2>
