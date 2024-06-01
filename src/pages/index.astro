@@ -1,29 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
 let error;
 if (Astro.request.method === "POST") {
   try {
-    body = await request.body;
     const data = await Astro.request.formData();
     const name = data.get("name");
     const email = data.get("email");
+
     const response = await fetch('https://catapult.purplebubble.org/api/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: 'example@gmail.com', name: 'Example User' }),
+      body: JSON.stringify({ name, email }),
     })
+
     const jsondata = await response.json();
+    console.log(jsondata);
     if (jsondata.ok = true){
       //do nothing
     } else{
       error = jsondata.error;
     }
   }
-  catch (error) {
-    if (error instanceof Error) {
-	console.log(error)
+
+  catch (anError) {
+    if (anError instanceof Error) {
+	console.log(anError)
     }
   }
 }
