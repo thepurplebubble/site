@@ -19,6 +19,16 @@ if (Astro.request.method === "POST") {
       },
     );
 
+    const loops = await fetch("https://app.loops.so/api/v1/contacts/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + import.meta.env.LOOPS_KEY,
+        },
+        body: JSON.stringify({ name, email }),
+    )
+
     const jsondata = await response.json();
     console.log(jsondata);
     if ((jsondata.ok = true)) {
