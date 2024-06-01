@@ -1,5 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+let error;
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name");
+    const email = data.get("email");
+
+    const response = await fetch(
+      "https://catapult.purplebubble.org/api/subscribe",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email }),
+      },
+    );
+
+    const jsondata = await response.json();
+    console.log(jsondata);
+    if ((jsondata.ok = true)) {
+      //do nothing
+    } else {
+      error = jsondata.error;
+    }
+  } catch (anError) {
+    if (anError instanceof Error) {
+      console.log(anError);
+    }
+  }
+}
 ---
 
 <Layout title="Purple Bubble" fiscalSponsor="true">
@@ -24,11 +56,8 @@ import Layout from "../layouts/Layout.astro";
     </p>
   </section>
   <section>
-    <form
-      action="https://postal.hackclub.com/subscribe"
-      method="POST"
-      accept-charset="utf-8"
-    >
+    {error && <p class="text-red-500">Error: {error}</p>}
+    <form method="POST" accept-charset="utf-8">
       <label for="name">Name</label><br />
       <input
         type="text"
