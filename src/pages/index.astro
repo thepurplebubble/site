@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-let error;
+let error: { ok: boolean; message: string } | null = null;
+
 if (Astro.request.method === "POST") {
   try {
     const data = await Astro.request.formData();
@@ -19,12 +20,47 @@ if (Astro.request.method === "POST") {
       },
     );
 
+    const loopsFormBody = `name=${encodeURIComponent(
+      name,
+    )}&email=${encodeURIComponent(email)}`;
+
+    const loops = await fetch(
+      "https://app.loops.so/api/newsletter-form/" +
+        import.meta.env.LOOPS_FORM_ID,
+      {
+        method: "POST",
+        body: loopsFormBody,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
+
     const jsondata = await response.json();
+    const loopsJson = await loops.json();
+
     console.log(jsondata);
-    if ((jsondata.ok = true)) {
-      //do nothing
+    console.log(loopsJson);
+
+    if (jsondata.ok && loopsJson.success) {
+      error = { ok: true, message: "Success! You're in the loop." };
     } else {
-      error = jsondata.error;
+      if (
+        !jsondata.ok &&
+        jsondata.message === "Email already subscribed" &&
+        loopsJson.success
+      ) {
+        error = {
+          ok: true,
+          message: "Success! You're in the loop.",
+        };
+      } else {
+        error = {
+          ok: false,
+          message:
+            "Something went wrong. Please try again and if it continues happening please contact us as listed under 'Want to chat? Got questions?'",
+        };
+      }
     }
   } catch (anError) {
     if (anError instanceof Error) {
@@ -56,7 +92,19 @@ if (Astro.request.method === "POST") {
     </p>
   </section>
   <section>
-    {error && <p class="text-red-500">Error: {error}</p>}
+    {
+      error && (
+        <div>
+          {
+            <h3
+              style={{ color: error.ok ? "green" : "red", textAlign: "center" }}
+            >
+              {error.message}
+            </h3>
+          }
+        </div>
+      )
+    }
     <form method="POST" accept-charset="utf-8">
       <label for="name">Name</label><br />
       <input
