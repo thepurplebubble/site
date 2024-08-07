@@ -27,6 +27,10 @@ const year = new Date().getFullYear();
       content="An open-source, next-generation messaging protocol with foundations in security and accessibility. Fostering secure and efficient communication and nurturing better connectivity, particularly in underdeveloped areas."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src https://*; child-src 'none';"
+    />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
     <script
