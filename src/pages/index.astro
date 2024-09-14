@@ -20,35 +20,16 @@ if (Astro.request.method === "POST") {
       },
     );
 
-    const loopsFormBody = `name=${encodeURIComponent(
-      name,
-    )}&email=${encodeURIComponent(email)}`;
-
-    const loops = await fetch(
-      "https://app.loops.so/api/newsletter-form/" +
-        import.meta.env.LOOPS_FORM_ID,
-      {
-        method: "POST",
-        body: loopsFormBody,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      },
-    );
-
     const jsondata = await response.json();
-    const loopsJson = await loops.json();
 
     console.log(jsondata);
-    console.log(loopsJson);
 
-    if (jsondata.ok && loopsJson.success) {
+    if (jsondata.ok) {
       error = { ok: true, message: "Success! You're in the loop." };
     } else {
       if (
         !jsondata.ok &&
-        jsondata.message === "Email already subscribed" &&
-        loopsJson.success
+        jsondata.message === "Email already subscribed"
       ) {
         error = {
           ok: true,
